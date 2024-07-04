@@ -1,0 +1,37 @@
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    date_added TIMESTAMP NOT NULL
+);
+
+CREATE TABLE teams (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE user_teams (
+    user_id BIGINT NOT NULL,
+    team_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, team_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (team_id) REFERENCES teams(id)
+);
+
+CREATE TABLE documents (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    word_count INT NOT NULL,
+    upload_time TIMESTAMP NOT NULL,
+	filedata longblob NOT Null,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+
+
+INSERT INTO `document_processor`.`teams` (`id`, `name`) VALUES ('101', 'DevTeam');
+INSERT INTO `document_processor`.`teams` (`id`, `name`) VALUES ('102', 'EditorTeam');
+INSERT INTO `document_processor`.`teams` (`id`, `name`) VALUES ('103', 'TesterTeam');
+INSERT INTO `document_processor`.`teams` (`id`, `name`) VALUES ('104', 'Analyser');
+INSERT INTO `document_processor`.`teams` (`id`, `name`) VALUES ('105', 'builder');
